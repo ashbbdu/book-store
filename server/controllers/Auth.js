@@ -1,7 +1,9 @@
 const User = require("../models/User");
-const Otp = require("../models/Otp");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
+const Otp = require("../models/Otp");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 module.exports.sendOtp = async (req, res) => {
   try {
@@ -25,6 +27,8 @@ module.exports.sendOtp = async (req, res) => {
       otp,
     });
 
+    console.log(optResponse, "otp res");
+
     return res.status(200).json({
       success: true,
       message: "OTP send successfully !",
@@ -40,13 +44,28 @@ module.exports.sendOtp = async (req, res) => {
 };
 
 module.exports.signUp = async (req, res) => {
+  const { firstName, lastName, email, password, confirmPassword, otp } =
+    req.body;
   try {
-    let { firstName, lastName, email, password, confirmPassword, otp } =
-      req.body;
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      return res.status(401).json({
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !otp
+    ) {
+      return res.status(404).json({
         success: false,
         message: "Please fill in the required fields",
+      });
+    }
+
+    let existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User with same email already exist",
       });
     }
 
@@ -57,42 +76,95 @@ module.exports.signUp = async (req, res) => {
       });
     }
 
-    let existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(401).json({
-        success: false,
-        message: "User with same email already exist",
-      });
-    }
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const recentOtp = await Otp.find({ email }).sort({ createdAt: -1 }).limit(1);
-      console.log(recentOtp , "recent otp")
-    if (otp !== recentOtp) {
-      return res.status(401).json({
+    // Match the opt
+    const recentOpt = await Otp.find().sort({ createdAt: -1 }).limit(1);
+    console.log(recentOpt[0].otp, "recentotp");
+    if (recentOpt[0].otp !== otp) {
+      return res.status(404).json({
         success: false,
         message: "Invalid OTP",
       });
     }
 
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    const createUser = await User.create({
+    const user = await User.create({
       firstName,
       lastName,
       email,
-      password: hashPassword,
+      password: hashedPassword,
+      confirmPassword: hashedPassword,
       profilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
     });
 
     return res.status(200).json({
       success: true,
-      message: "User signed up successfully",
-      user : createUser
+      message: "User Created Successfully",
+      user,
     });
   } catch (error) {
-    return res.status(400).json({
+    console.log(error);
+    return res.status(404).json({
       success: false,
-      message: "Unable to sign up , please try gain",
+      message: "Unable to create user , please try again",
+    });
+  }
+};
+
+module.exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!email || !password) {
+      return res.status(401).json({
+        success: false,
+        message: "Please fill in the required fields !",
+      });
+    }
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User does not exist",
+      });
+    }
+
+    const payload = {
+      id: user._id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
+
+    if (await bcrypt.compare(password, user.password)) {
+      let token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: "24h",
+      });
+      user.token = token;
+      user.password = undefined;
+      user.confirmPassword = undefined;
+
+      
+      const options = {
+        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      };
+      res.cookie("token", token, options).status(200).json({
+        success: true,
+        token,
+        user,
+        message: "User Logged in successfully",
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "Incorrenct Password",
+      });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: "Unable to  login , please try again",
     });
   }
 };
