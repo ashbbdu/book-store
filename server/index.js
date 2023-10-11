@@ -1,6 +1,6 @@
 const express = require("express");
 const { connect } = require("./config/database");
-// const authRoutes = require("./routes/Auth") 
+const authRoutes = require("./routes/Auth") 
 const app = express();
 
 const PORT = process.env.PORT || 5000 
@@ -11,7 +11,7 @@ app.use(express.json());
 connect();
 
 // Routes
-// app.use("/api/v1/auth" , authRoutes)
+app.use("/api/v1/auth" , authRoutes)
 
 app.get("/" , (req , res) => {
     res.send("App is running")
