@@ -2,6 +2,7 @@ const express = require("express");
 const { connect } = require("./config/database");
 const authRoutes = require("./routes/Auth") 
 const userRoutes = require("./routes/user") 
+const bookRoutes = require("./routes/book") 
 const app = express();
 
 const PORT = process.env.PORT || 5000 
@@ -14,6 +15,7 @@ connect();
 // Routes
 app.use("/api/v1/auth" , authRoutes)
 app.use("/api/v1/users" , userRoutes)
+app.use("/api/v1/book" , bookRoutes)
 
 app.get("/" , (req , res) => {
     res.send("App is running")

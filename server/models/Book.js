@@ -16,10 +16,6 @@ const bookSchema = new mongoose.Schema({
     required: [true, "Genre is required !"],
     trim: true,
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   language: {
     type: String,
     trim: true,
@@ -30,7 +26,7 @@ const bookSchema = new mongoose.Schema({
   },
   coverPicture: {
     type: String,
-    required: true,
+    // required: true,
   },
   //   ratings : {} have to check
 });
