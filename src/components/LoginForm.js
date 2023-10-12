@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { apiConnector } from "../services/apiConnector";
-import { endpoints } from "../services/apis";
-import apiServices from "../services/apiServices";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/operations/authApis";
 
 const LoginForm = () => {
+    const navigate = useNavigate()
   let [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -24,7 +23,7 @@ const LoginForm = () => {
     console.log(formData, "fd");
     // API Call here
     const {email , password} = formData;
-    login(email , password)
+    login(email , password , navigate)
 
   };
 
@@ -44,7 +43,7 @@ const LoginForm = () => {
             Log in
           </h3>
 
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-2">
             <label className="form-label" htmlFor="email">
               Email address
             </label>
@@ -58,7 +57,7 @@ const LoginForm = () => {
             />
           </div>
 
-          <div className="form-outline mb-4">
+          <div className="form-outline mb-2">
             <label className="form-label" htmlFor="password">
               Password
             </label>
@@ -72,22 +71,18 @@ const LoginForm = () => {
             />
           </div>
 
-          <div className="pt-1 mb-4">
-            <button className="btn btn-info " type="submit">
+          <div className="pt-1 my-4">
+            <button className="btn btn-info w-100 " type="submit">
               Login
             </button>
           </div>
 
-          <p className="small mb-5 pb-lg-2">
-            <a className="text-muted" href="#!">
-              Forgot password?
-            </a>
-          </p>
+    
           <p>
             Don't have an account?{" "}
-            <a href="#!" className="link-info">
+            <Link to="/signup" className="link-info">
               Register here
-            </a>
+            </Link>
           </p>
         </form>
       </div>

@@ -7,15 +7,17 @@ import UserBooks from "./pages/UserBooks";
 import SideMenu from "./components/SideMenu";
 import AuthLayout from "./layout/AuthLayout";
 import PrivateRoute from "./privateRoutes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="main">
+      <Toaster position="top-center" reverseOrder={false} />
       {/* <SideMenu /> */}
 
       <Routes>
         <Route
-        path="/dashboard"
+          path="/dashboard"
           element={
             <PrivateRoute>
               <Dashboard />
@@ -24,7 +26,7 @@ function App() {
         />
 
         <Route
-        path="book-details"
+          path="book-details"
           element={
             <PrivateRoute>
               <BookDetails />
@@ -33,7 +35,7 @@ function App() {
         />
 
         <Route
-        path="user-books"
+          path="user-books"
           element={
             <PrivateRoute>
               <UserBooks />

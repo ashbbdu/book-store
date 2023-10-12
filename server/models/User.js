@@ -21,11 +21,6 @@ const userSchema = new mongoose.Schema({
     required : [true , "Password is required !"],
     trim:  true
    },
-   confirmPassword : {
-    type :String,
-    required : [true , "Confirm Password is required !"],
-    trim:  true
-   },
    books : [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Books",

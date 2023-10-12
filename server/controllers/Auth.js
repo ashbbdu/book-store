@@ -44,7 +44,7 @@ module.exports.sendOtp = async (req, res) => {
 };
 
 module.exports.signUp = async (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword, otp } =
+  const { firstName, lastName, email, password, otp } =
     req.body;
   try {
     if (
@@ -52,7 +52,6 @@ module.exports.signUp = async (req, res) => {
       !lastName ||
       !email ||
       !password ||
-      !confirmPassword ||
       !otp
     ) {
       return res.status(404).json({
@@ -69,20 +68,12 @@ module.exports.signUp = async (req, res) => {
       });
     }
 
-    if (password !== confirmPassword) {
-      return res.status(401).json({
-        success: false,
-        message: "Password does not match",
-      });
-    }
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Match the opt
     // const recentOpt = await Otp.find({email :  email}).sort({ createdAt: -1 }).limit(1);
     const findOtp = await Otp.find()
     const recentOpt = findOtp.slice(-1)
-    // console.log(getOtp, "recentotp");
     if (recentOpt[0].otp !== otp) {
       return res.status(404).json({
         success: false,
@@ -95,7 +86,6 @@ module.exports.signUp = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      confirmPassword: hashedPassword,
       profilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
     });
 
@@ -144,7 +134,6 @@ module.exports.login = async (req, res) => {
       });
       user.token = token;
       user.password = undefined;
-      user.confirmPassword = undefined;
 
       
       const options = {
