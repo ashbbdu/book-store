@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Dashboard from "./pages/Dashboard";
+import BookDetails from "./pages/BookDetails";
+import UserBooks from "./pages/UserBooks";
+import SideMenu from "./components/SideMenu";
+import AuthLayout from "./layout/AuthLayout";
+import PrivateRoute from "./privateRoutes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      {/* <SideMenu /> */}
+
+      <Routes>
+        <Route
+        path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+        path="book-details"
+          element={
+            <PrivateRoute>
+              <BookDetails />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+        path="user-books"
+          element={
+            <PrivateRoute>
+              <UserBooks />
+            </PrivateRoute>
+          }
+        />
+
+        <Route path="/" element={<AuthLayout />} />
+        <Route path="/signup" element={<AuthLayout />} />
+        <Route path="/verify-account" element={<AuthLayout />} />
+      </Routes>
     </div>
   );
 }
