@@ -74,7 +74,8 @@ module.exports.signUp = async (req, res) => {
     // const recentOpt = await Otp.find({email :  email}).sort({ createdAt: -1 }).limit(1);
     const findOtp = await Otp.find()
     const recentOpt = findOtp.slice(-1)
-    if (recentOpt[0].otp !== otp) {
+    console.log(recentOpt , "recent")
+    if (recentOpt[0]?.otp !== otp) {
       return res.status(404).json({
         success: false,
         message: "Invalid OTP",

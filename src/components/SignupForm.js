@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { setSignupData } from "../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { sendOtp } from "../services/operations/authApis";
-import { toast } from "react-hot-toast";
 
 const SignupForm = () => {
  const navigate = useNavigate()    // if password match to move to opt screen else toast

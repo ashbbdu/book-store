@@ -1,12 +1,47 @@
-import React, { useState } from "react";
-import OtpInput from 'react-otp-input';
-import {useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
+import OtpInput from "react-otp-input";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apis";
+import { signup } from "../services/operations/authApis";
+import { setLoading } from "../store/slices/authSlice";
 
 const OtpForm = () => {
-  const {signupData} = useSelector((state) => state.auth);
-  console.log(signupData, "signupdata");
-  const [otp, setOtp] = useState('');
-  console.log(otp , "otp")
+  const { signupData } = useSelector((state) => state.auth);
+  const { firstName, lastName, email, password } = signupData;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [otp, setOtp] = useState("");
+  console.log(otp, "otp");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // signup(firstName, lastName, email, password, otp, dispatch, navigate);
+    // Have to fix this
+    dispatch(setLoading(true));
+    try {
+      const createAcc = await apiConnector("POST", endpoints.SIGNUP_API, {
+        ...signupData,
+        otp,
+      });
+      console.log(createAcc, "created");
+      if (createAcc.data.success) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error, "errors");
+    }
+    dispatch(setLoading(false));
+  };
+
+  // useEffect(() => {
+  //   if(signupData === null) {
+  //     navigate("/")
+  //   }
+  // },[signupData])
+
   return (
     <>
       <div className="px-5 ms-xl-4">
@@ -18,12 +53,11 @@ const OtpForm = () => {
       </div>
 
       <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5 otp-input">
-        <form style={{ width: "100%" }}>
+        <form style={{ width: "100%" }} onSubmit={handleSubmit}>
           <OtpInput
             value={otp}
             onChange={setOtp}
             numInputs={6}
-            renderSeparator={<span>-</span>}
             renderInput={(props) => <input {...props} />}
           />
           <div className="pt-1 my-4 d-flex justify-content-center ">

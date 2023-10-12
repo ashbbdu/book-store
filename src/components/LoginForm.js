@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/operations/authApis";
+import {useDispatch} from "react-redux"
 
 const LoginForm = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
   let [formData, setFormData] = useState({
     email: "",
@@ -23,7 +25,7 @@ const LoginForm = () => {
     console.log(formData, "fd");
     // API Call here
     const {email , password} = formData;
-    login(email , password , navigate)
+    login(email , password , navigate , dispatch)
 
   };
 
