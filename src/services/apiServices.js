@@ -15,7 +15,7 @@ function authHeader() {
 
 
   const config = {
-    api: "http://localhost:3000/",
+    api: "http://localhost:4000/api/v1",
   };
   const httpGet = (endpoint) => {
     return fetch(`${config.api}${endpoint}`, {
@@ -28,8 +28,9 @@ function authHeader() {
         throw Error(error);
       });
   };
-  const httpPost = (endpoint, data) => {
-    return fetch(`${config.api}${endpoint}`, {
+  const httpPost = async (endpoint, data) => {
+    console.log(endpoint , JSON.stringify(data) , "endpoint")
+    return await fetch(`${config.api}${endpoint}`, {
       method: "post",
       body: data ? JSON.stringify(data) : null,
       headers: authHeader(),
@@ -37,7 +38,7 @@ function authHeader() {
       .then((response) => handleResponse(response))
       .then((response) => response)
       .catch((error) => {
-        console.error(error);
+        console.error(error , "error");
         throw Error(error);
       });
   };
@@ -68,7 +69,7 @@ function authHeader() {
       });
   };
   const handleResponse = (response) => {
-    return response.json();
+    return  response.json();
   };
   export default {
     httpGet,

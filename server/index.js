@@ -4,10 +4,12 @@ const authRoutes = require("./routes/Auth")
 const userRoutes = require("./routes/user") 
 const bookRoutes = require("./routes/book") 
 const app = express();
+var cors = require('cors')
 
 const PORT = process.env.PORT || 5000 
 require("dotenv").config()
 app.use(express.json());
+app.use(cors())
 
 // function to connect the DB
 connect();

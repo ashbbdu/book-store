@@ -1,60 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apis";
+import apiServices from "../services/apiServices";
+import { login } from "../services/operations/authApis";
 
 const LoginForm = () => {
+  let [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  console.log(formData, "formdata");
+
+  const onChangeHander = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    console.log(formData, "fd");
+    // API Call here
+    const {email , password} = formData;
+    login(email , password)
+
+  };
+
   return (
     <>
-      <div class="px-5 ms-xl-4">
+      <div className="px-5 ms-xl-4">
         <i
-          class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
+          className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
           style={{ color: "#709085" }}
         ></i>
-        <span class="h1 fw-bold mb-0">Logo</span>
+        <span className="h1 fw-bold mb-0">Logo</span>
       </div>
 
-      <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-        <form style={{ width: "100%" }}>
-          <h3 class="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
+      <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+        <form style={{ width: "100%" }} onSubmit={submitHandler}>
+          <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
             Log in
           </h3>
 
-          <div class="form-outline mb-4">
-          <label class="form-label" for="form2Example18">
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="email">
               Email address
             </label>
             <input
+              name="email"
               type="email"
-              id="form2Example18"
-              class="form-control form-control-lg"
+              id="email"
+              className="form-control"
+              value={formData.email}
+              onChange={onChangeHander}
             />
-          
           </div>
 
-          <div class="form-outline mb-4">
-          <label class="form-label" for="form2Example28">
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="password">
               Password
             </label>
             <input
+              name="password"
               type="password"
-              id="form2Example28"
-              class="form-control form-control-lg"
+              id="password"
+              className="form-control"
+              value={formData.password}
+              onChange={onChangeHander}
             />
-            
           </div>
 
-          <div class="pt-1 mb-4">
-            <button class="btn btn-info btn-lg btn-block" type="button">
+          <div className="pt-1 mb-4">
+            <button className="btn btn-info " type="submit">
               Login
             </button>
           </div>
 
-          <p class="small mb-5 pb-lg-2">
-            <a class="text-muted" href="#!">
+          <p className="small mb-5 pb-lg-2">
+            <a className="text-muted" href="#!">
               Forgot password?
             </a>
           </p>
           <p>
             Don't have an account?{" "}
-            <a href="#!" class="link-info">
+            <a href="#!" className="link-info">
               Register here
             </a>
           </p>
