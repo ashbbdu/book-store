@@ -10,6 +10,7 @@ import PrivateRoute from "./privateRoutes";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 import {useSelector} from "react-redux"
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const {loading , token} = useSelector(state => state.auth)
@@ -20,7 +21,7 @@ function App() {
       loading &&   <Loader />
     }
     <div className="main">
-   
+  
       <Toaster position="top-center" reverseOrder={false} />
       {/* <SideMenu /> */}
 
@@ -35,7 +36,7 @@ function App() {
         />
 
         <Route
-          path="book-details"
+          path="book-details:/id"
           element={
             <PrivateRoute>
               <BookDetails />

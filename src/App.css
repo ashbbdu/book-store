@@ -118,3 +118,44 @@ body{
   }
 }
 
+.dashboard {
+  overflow: scroll;
+    height: 100vh;
+
+}
+
+.head-div.toggled , .pro-sidebar.toggled {
+  width: 80px !important;
+  min-width: 80px !important;
+}
+
+.header {
+  height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #0dcaf0;
+    color: black;
+}
+
+.header p {
+  display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+/* .pro-sidebar {
+  width: 80px !important;
+  min-width: 80px !important;
+}
+
+.head-div {
+  display: none !important;
+} */
+
+/* .pro-sidebar.toggled ~ .sidebar-sibling {
+  margin-left: 320px !important;
+} */

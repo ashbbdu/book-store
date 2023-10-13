@@ -6,6 +6,9 @@ export const endpoints = {
     SENDOTP_API:   "/auth/send-otp",
     SIGNUP_API:"/auth/signup",
     LOGIN_API: "/auth/login",
-    RESETPASSTOKEN_API: "/auth/reset-password-token",
-    RESETPASSWORD_API:  "/auth/reset-password",
+  }
+
+  export const bookEndpoints = {
+    GET_BOOKS_API : "/book/get-books",
+    CREATE_BOOK_API : "/book/"
   }
