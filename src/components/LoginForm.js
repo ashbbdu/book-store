@@ -25,7 +25,7 @@ const LoginForm = () => {
     console.log(formData, "fd");
     // API Call here
     const {email , password} = formData;
-    login(email , password , navigate , dispatch)
+   dispatch(login(email , password , navigate ))
 
   };
 

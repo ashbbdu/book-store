@@ -1,9 +1,11 @@
+
+const token = localStorage.getItem("token") ? localStorage.getItem("token") : null;
 function authHeader() {
-    const getToken = "TOKEN";
-  if (getToken != null) {
+
+  if (token != null) {
       return {
         "Content-Type": "application/json",
-        Authorization: `Token ${getToken}`,
+        Authorization: `Token ${token}`,
       };
     } else {
       return {

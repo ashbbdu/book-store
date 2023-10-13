@@ -18,22 +18,7 @@ const OtpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // signup(firstName, lastName, email, password, otp, dispatch, navigate);
-    // Have to fix this
-    dispatch(setLoading(true));
-    try {
-      const createAcc = await apiConnector("POST", endpoints.SIGNUP_API, {
-        ...signupData,
-        otp,
-      });
-      console.log(createAcc, "created");
-      if (createAcc.data.success) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error, "errors");
-    }
-    dispatch(setLoading(false));
+    dispatch(signup(firstName, lastName, email, password, otp, navigate));
   };
 
   // useEffect(() => {
