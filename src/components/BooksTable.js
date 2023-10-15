@@ -9,35 +9,37 @@ import { deleteBok } from "../services/operations/bookApis";
 import Search from "./Search";
 import Pagination from "./Pagination";
 
-const BooksTable = () => {
-    const [open , setOpen] = useState(false)
-    const [id , setId] = useState(null)
+const BooksTable = ({ books }) => {
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { bookData } = useSelector((state) => state.book);
-  
+
   const deleteHandler = async () => {
-        dispatch(deleteBok(id))
-        setOpen(false)
+    dispatch(deleteBok(id));
+    setOpen(false);
   };
-
-
-
 
   return (
     <div className="table-container">
       <Modal
-            open={open}
-            setOpen={setOpen}
-            text="Are you sure you want to delete this item ?"
-            confirmText="Yes"
-            cancelText="No"
-            deleteHandler={deleteHandler}
-          />
-         <div className="d-flex align-items-center justify-content-between" style={{marginTop : "4rem" , marginBottom : "0.5rem"}}>
-         <Search />
-         <button onClick={() => navigate("/add-book")} className="btn btn-info">+ Add Book</button>
-         </div>
+        open={open}
+        setOpen={setOpen}
+        text="Are you sure you want to delete this item ?"
+        confirmText="Yes"
+        cancelText="No"
+        deleteHandler={deleteHandler}
+      />
+      <div
+        className="d-flex align-items-center justify-content-between"
+        style={{ marginTop: "4rem", marginBottom: "0.5rem" }}
+      >
+        <Search />
+        <button onClick={() => navigate("/add-book")} className="btn btn-info">
+          + Add Book
+        </button>
+      </div>
       <table class="table">
         <thead>
           <tr>
@@ -51,10 +53,10 @@ const BooksTable = () => {
           </tr>
         </thead>
         <tbody>
-          {bookData.map((res, index) => {
+          {books.map((res, index) => {
             return (
               <tr key={res._id}>
-                <td>{index + 1}</td>
+                <td>{res._id}</td>
                 <td>{res.title}</td>
                 <td>{res.author}</td>
                 <td>{res.genre}</td>
@@ -71,10 +73,12 @@ const BooksTable = () => {
                     <span onClick={() => navigate(`/edit-book/${res._id}`)}>
                       <BiSolidCommentEdit size={20} />
                     </span>
-                    <span onClick={() => {
-                        setOpen(true)
-                        setId(res._id)
-                    }}>
+                    <span
+                      onClick={() => {
+                        setOpen(true);
+                        setId(res._id);
+                      }}
+                    >
                       <RiDeleteBin2Fill size={20} />
                     </span>
                   </div>

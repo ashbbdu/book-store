@@ -20,6 +20,7 @@ module.exports.addBook = async (req, res) => {
       language,
       totalPages,
       user: userId,
+      createdAt : Date.now() ,
       coverPicture: "",
     } );
 
@@ -88,13 +89,13 @@ module.exports.getAllBooks = async (req, res) => {
           input: {
             $concat: ["$title", "$author" , "$genre" , "$language" , "$totalPages" ],
           },
-          regex : searchText,
+          regex : searchText == undefined ? "" : searchText,
           options: "i",
         },
       },
     })
-      .limit(11)
-      .sort({ title : 1 })
+      .limit()
+      .sort({ createdAt : -1 })
       .exec();
 
       // console.log("books" , books)
