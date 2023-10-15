@@ -19,15 +19,21 @@ const bookSchema = new mongoose.Schema({
   language: {
     type: String,
     trim: true,
+    required : true
   },
   totalPages: {
     type: String,
     trim: true,
+    required : true
   },
   coverPicture: {
     type: String,
     // required: true,
   },
+  user : {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }
   //   ratings : {} have to check
 });
 

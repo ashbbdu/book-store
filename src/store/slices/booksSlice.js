@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bookData: [],
-
+bookDetails : {}
 };
 
 const bookSlice = createSlice({
@@ -12,15 +12,17 @@ const bookSlice = createSlice({
     setbookData(state, value) {
       state.bookData = value.payload;
     },
+    setBookDetails(state , value) {
+        state.bookDetails = value.payload
+    }
 
   },
 });
 
 export const {
-     setSignupData, 
-    setLoading, 
-    setToken,
-    setbookData
+   
+    setbookData,
+    setBookDetails
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

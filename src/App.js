@@ -9,55 +9,72 @@ import AuthLayout from "./layout/AuthLayout";
 import PrivateRoute from "./privateRoutes";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 import Sidebar from "./components/Sidebar";
+import AddEditBook from "./pages/AddBook";
+import AddBook from "./pages/AddBook";
 
 function App() {
-  const {loading , token} = useSelector(state => state.auth)
-  console.log(token , "token")
+  const { loading, token } = useSelector((state) => state.auth);
+  console.log(token, "token");
   return (
     <>
-    {
-      loading &&   <Loader />
-    }
-    <div className="main">
-  
-      <Toaster position="top-center" reverseOrder={false} />
-      {/* <SideMenu /> */}
+      {loading && <Loader />}
+      <div className="main">
+        <Toaster position="top-center" reverseOrder={false} />
+        {/* <SideMenu /> */}
 
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
 
-        <Route
-          path="book-details:/id"
-          element={
-            <PrivateRoute>
-              <BookDetails />
-            </PrivateRoute>
-          }
-        />
+          <Route
+            path="/book-details/:id"
+            element={
+              <PrivateRoute>
+                <BookDetails />
+              </PrivateRoute>
+            }
+          />
 
-        <Route
-          path="user-books"
-          element={
-            <PrivateRoute>
-              <UserBooks />
-            </PrivateRoute>
-          }
-        />
+          <Route
+            path="/user-books"
+            element={
+              <PrivateRoute>
+                <UserBooks />
+              </PrivateRoute>
+            }
+          />
 
-        <Route path="/" element={<AuthLayout />} />
-        <Route path="/signup" element={<AuthLayout />} />
-        <Route path="/verify-account" element={<AuthLayout />} />
-      </Routes>
-    </div>
+          <Route
+            path="/add-book"
+            element={
+              <PrivateRoute>
+                <AddBook />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/edit-book/:id"
+            element={
+              <PrivateRoute>
+                <AddBook />
+              </PrivateRoute>
+            }
+          />
+
+          <Route path="/" element={<AuthLayout />} />
+          <Route path="/signup" element={<AuthLayout />} />
+          <Route path="/verify-account" element={<AuthLayout />} />
+        </Routes>
+      </div>
     </>
   );
 }

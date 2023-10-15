@@ -16,14 +16,10 @@ const BookCard = () => {
                   <img class="card-img-top" src={res.cover} alt="book cover" />
                   <div class="card-body">
                     <h1>{res.title}</h1>
-                    <p class="card-text">
-                        Decription will go here
-                    </p>
-                    <h2>{res.author}</h2>
-                    <h2>{res.lanuage}</h2>
-                <h2>{res.genre}</h2>
-                <h2>{res.language}</h2>
-                <h2>{res.totalPages}</h2>
+                    <p>{res.author}</p>
+                <p>{res.genre}</p>
+                <p>{res.language}</p>
+                <p>{res.totalPages}</p>
                   </div>
                 </div>
               </div>

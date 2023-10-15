@@ -10,5 +10,8 @@ export const endpoints = {
 
   export const bookEndpoints = {
     GET_BOOKS_API : "/book/get-books",
-    CREATE_BOOK_API : "/book/"
+    CREATE_BOOK_API : "/book/add-book",
+    EDIT_BOOK_API : "/book/edit-book",
+    GET_BOOK_DETAILS_API : "/book/book-details",
+    DELETE_BOOK_API : "/book/delete-book"
   }

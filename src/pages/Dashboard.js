@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookCard from "../components/BookCard";
+import BooksTable from "../components/BooksTable";
 import { getAllBooks } from "../services/operations/bookApis";
 
 const Dashboard = () => {
@@ -16,10 +17,11 @@ const Dashboard = () => {
 
   return (
     <div class="container-fluid dashboard">
-      <div class="row">
-        <BookCard />
+
+        {/* <BookCard /> */}
+        <BooksTable  />
       </div>
-    </div>
+
   );
 };
 
