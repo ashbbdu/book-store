@@ -45,7 +45,7 @@ module.exports.addBook = async (req, res) => {
 
 module.exports.editBook = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const bookId = req.params.id;
     const { title, author, genre, language, totalPages } = req.body;
     if (!title || !author || !genre || !language || !totalPages) {
       return res.status(404).json({
@@ -54,15 +54,14 @@ module.exports.editBook = async (req, res) => {
       });
     }
 
-    const book = await Book.findByIdAndUpdate({_id : userId} , {
+    const book = await Book.findByIdAndUpdate({_id : bookId} , {
       title,
       author,
       genre,
       language,
       totalPages,
-      user: userId,
       coverPicture: "",
-    })
+    },{new : true})
 
 
 
@@ -81,11 +80,27 @@ module.exports.editBook = async (req, res) => {
 };
 
 module.exports.getAllBooks = async (req, res) => {
+  const {searchText} = req.body
   try {
-    const books = await Book.find();
-    return res.status(200).json({
+    const books = await Book.find({
+      $expr: {
+        $regexMatch: {
+          input: {
+            $concat: ["$title", "$author" , "$genre" , "$language" , "$totalPages" ],
+          },
+          regex : searchText,
+          options: "i",
+        },
+      },
+    })
+      .limit(11)
+      .sort({ title : 1 })
+      .exec();
+
+      // console.log("books" , books)
+    res.status(200).json({
       success: true,
-      message: "Books fetched successfully !",
+      message: "Books fetched successfully",
       books,
     });
   } catch (error) {

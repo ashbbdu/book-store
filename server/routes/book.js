@@ -8,8 +8,9 @@ const { auth } = require("../middlewares/auth");
 const router = express.Router();
 
 router.post("/add-book" , auth , addBook)
-router.get("/get-books" , auth , getAllBooks)
-router.get("/edit-book" , auth , editBook)
+
+router.post("/get-books" , auth , getAllBooks)
+router.put("/edit-book/:id" , auth , editBook)
 router.get("/book-details/:id" , auth , bookDetails)
 router.delete("/delete-book/:id" , auth , deleteBook)
 

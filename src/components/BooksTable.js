@@ -7,6 +7,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import Modal from "./Modal";
 import { deleteBok } from "../services/operations/bookApis";
 import Search from "./Search";
+import Pagination from "./Pagination";
 
 const BooksTable = () => {
     const [open , setOpen] = useState(false)
@@ -19,6 +20,33 @@ const BooksTable = () => {
         dispatch(deleteBok(id))
         setOpen(false)
   };
+
+
+//   Pagination
+function PaginatedItems({ itemsPerPage }) {
+    // Here we use item offsets; we could also use page offsets
+    // following the API or data you're working with.
+    const [itemOffset, setItemOffset] = useState(0);
+  
+    // Simulate fetching items from another resources.
+    // (This could be items from props; or items loaded in a local state
+    // from an API endpoint with useEffect and useState)
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = items.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(items.length / itemsPerPage);
+  
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % items.length;
+      console.log(
+        `User requested page number ${event.selected}, which is offset ${newOffset}`
+      );
+      setItemOffset(newOffset);
+    };
+  
+
+// Paginatio
 
   return (
     <div className="table-container">
@@ -40,6 +68,7 @@ const BooksTable = () => {
             <th scope="col">Book No.</th>
             <th scope="col">Title</th>
             <th scope="col">Author</th>
+            <th scope="col">Genre</th>
             <th scope="col">Language</th>
             <th scope="col">Pages</th>
             <th scope="col">Action</th>
@@ -52,6 +81,7 @@ const BooksTable = () => {
                 <td>{index + 1}</td>
                 <td>{res.title}</td>
                 <td>{res.author}</td>
+                <td>{res.genre}</td>
                 <td>{res.language}</td>
                 <td>{res.totalPages}</td>
                 <td>
@@ -77,6 +107,7 @@ const BooksTable = () => {
             );
           })}
         </tbody>
+        <Pagination />
       </table>
     </div>
   );

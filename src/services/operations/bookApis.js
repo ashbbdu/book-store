@@ -4,19 +4,14 @@ import { setbookData, setBookDetails } from "../../store/slices/booksSlice";
 import { bookEndpoints } from "../apis";
 import apiServices from "../apiServices";
 
-export const getAllBooks = () => {
+export const getAllBooks = (searchText) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiServices.httpGet(bookEndpoints.GET_BOOKS_API);
+      const response = await apiServices.httpPost(bookEndpoints.GET_BOOKS_API , {searchText : searchText});
 
       dispatch(setbookData(response.books));
 
-      if (response.success) {
-        toast.success(response.message);
-      } else {
-        toast.error(response.message);
-      }
     } catch (error) {
       toast.error("Something went wrong");
     }
@@ -85,12 +80,13 @@ export const addBook = (title, author, genre, language, totalPages , navigate) =
   };
 };
 
-export const editBook = (title, author, genre, language, totalPages , navigate , id) => {
+export const editBook = (title, author, genre, language, totalPages ,id, navigate  ) => {
+    console.log(id , "controllers id")
     return async (dispatch) => {
         dispatch(setLoading(true));
         try {
-          const response = await apiServices.httpPost(
-            bookEndpoints.EDIT_BOOK_API,
+          const response = await apiServices.httpPut(
+           `${bookEndpoints.EDIT_BOOK_API}/${id}`,
             {
               title,
               author,

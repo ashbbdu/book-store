@@ -19,7 +19,7 @@ function authHeader() {
 const config = {
   api: "http://localhost:4000/api/v1",
 };
-const httpGet = (endpoint) => {
+const httpGet = (endpoint , data) => {
   return fetch(`${config.api}${endpoint}`, {
     headers: authHeader(),
   })

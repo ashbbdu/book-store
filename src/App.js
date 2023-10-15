@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import Sidebar from "./components/Sidebar";
 import AddEditBook from "./pages/AddBook";
 import AddBook from "./pages/AddBook";
+import EditBook from "./pages/EditBook";
 
 function App() {
   const { loading, token } = useSelector((state) => state.auth);
@@ -65,7 +66,7 @@ function App() {
             path="/edit-book/:id"
             element={
               <PrivateRoute>
-                <AddBook />
+                <EditBook />
               </PrivateRoute>
             }
           />

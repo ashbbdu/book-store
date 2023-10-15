@@ -9,32 +9,41 @@ const EditBook = () => {
   const navigate = useNavigate();
   const { bookDetails } = useSelector((state) => state.book);
   console.log(bookDetails, "bookDetailsasdfasf");
-  const ash = useParams()
-  console.log(ash, "ash");
-
-  useEffect(() => {
-    dispatch(getBookDetails(id))
-  } ,[])
-
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
+    getValues,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: "",
+      title:"",
       author: "",
-      genre: "",
+      genre:"",
       language: "",
       totalPages: "",
     },
   });
 
+  useEffect(() => {
+    setValue("title" , bookDetails?.title)
+    setValue("author" , bookDetails.author)
+    setValue("genre" , bookDetails.genre)
+    setValue("language" , bookDetails.language)
+    setValue("totalPages" , bookDetails.totalPages)
+  } ,[[register]])
+
+  useEffect(() => {
+   
+    dispatch(getBookDetails(id));
+  },[] );
+
 
   const submitHandler = async (data) => {
     const { title, author, genre, language, totalPages } = data;
-    dispatch(editBook(title, author, genre, language, totalPages, navigate));
+    dispatch(editBook(title, author, genre, language, totalPages , id, navigate));
   };
 
   return (
@@ -46,6 +55,8 @@ const EditBook = () => {
         <div className="mb-1">
           <label>Title</label>
           <input
+       
+    
             className="form-control"
             type="text"
             {...register("title", { required: true })}
@@ -57,6 +68,7 @@ const EditBook = () => {
         <div className="mb-1">
           <label>Author</label>
           <input
+    
             className="form-control"
             type="text"
             {...register("author", { required: true })}
@@ -93,7 +105,7 @@ const EditBook = () => {
           <label>Total Pages</label>
           <input
             className="form-control"
-            type="text"
+            type="number"
             {...register("totalPages", { required: true })}
           />
           {errors.totalPages && (
