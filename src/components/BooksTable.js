@@ -17,16 +17,17 @@ const BooksTable = ({ books }) => {
   const [id, setId] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { bookData } = useSelector((state) => state.book);
+  const {cartData} = useSelector(state => state.cart)
+  console.log(cartData , "cartData")
 
   const deleteHandler =  () => {
     dispatch(deleteBok(id));
     setOpen(false);
   };
 
-  const handleCart =  (id) => {
+  const handleCart =  (id , data) => {
     console.log(id , "id")
-    dispatch(addToCart(id))
+    dispatch(addToCart(id , data))
   }
 
   return (
@@ -89,7 +90,7 @@ const BooksTable = ({ books }) => {
                     >
                       <RiDeleteBin2Fill size={20} />
                     </span>
-                    <span onClick={() =>  handleCart(res._id)}>
+                    <span onClick={() =>  handleCart(res._id , res)}>
                       <BsFillCartCheckFill />
                     </span>
                   </div>

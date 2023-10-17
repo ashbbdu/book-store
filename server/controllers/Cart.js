@@ -66,7 +66,7 @@ module.exports.removeFromCart = async (req , res) => {
 
 module.exports.cartItems = async (req , res) => {
     try {
-        const cartItem = await Cart.find();
+        const cartItem = await Cart.find().populate("book").exec();
         return res.status(200).json({
             success : false,
             message : "Item added into cart successfully",

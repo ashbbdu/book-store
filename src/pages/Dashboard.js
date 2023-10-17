@@ -8,7 +8,6 @@ import { setLoading } from "../store/slices/authSlice";
 
 const Dashboard = () => {
   const [books, setBooks] = useState([]);
-  console.log(books , "books")
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const { bookData } = useSelector((state) => state.book);

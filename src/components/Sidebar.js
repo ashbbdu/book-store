@@ -35,6 +35,9 @@ const Sidebar = () => {
             <Link exact to="/profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </Link>
+            <Link exact to="/cart" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Cart</CDBSidebarMenuItem>
+            </Link>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

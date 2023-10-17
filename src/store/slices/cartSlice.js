@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
- cartData : null,
+ cartData : [],
 
 };
 
 const cartSlice = createSlice({
-  name: "auth",
+  name: "cart",
   initialState: initialState,
   reducers: {
     setCartData(state, value) {
-      state.cartData = value.payload;
+      state.cartData = [...state.cartData , value.payload];
     },
   },
 });
