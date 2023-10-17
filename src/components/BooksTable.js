@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { BiSolidCommentEdit } from "react-icons/bi";
 import { RiDeleteBin2Fill } from "react-icons/ri";
+import {BsFillCartCheckFill} from "react-icons/bs"
 import Modal from "./Modal";
 import { deleteBok } from "../services/operations/bookApis";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import { setCartData } from "../store/slices/cartSlice";
+import { addToCart } from "../services/operations/cartApis";
 
 const BooksTable = ({ books }) => {
   const [open, setOpen] = useState(false);
@@ -16,10 +19,15 @@ const BooksTable = ({ books }) => {
   const dispatch = useDispatch();
   const { bookData } = useSelector((state) => state.book);
 
-  const deleteHandler = async () => {
+  const deleteHandler =  () => {
     dispatch(deleteBok(id));
     setOpen(false);
   };
+
+  const handleCart =  (id) => {
+    console.log(id , "id")
+    dispatch(addToCart(id))
+  }
 
   return (
     <div className="table-container">
@@ -80,6 +88,9 @@ const BooksTable = ({ books }) => {
                       }}
                     >
                       <RiDeleteBin2Fill size={20} />
+                    </span>
+                    <span onClick={() =>  handleCart(res._id)}>
+                      <BsFillCartCheckFill />
                     </span>
                   </div>
                 </td>

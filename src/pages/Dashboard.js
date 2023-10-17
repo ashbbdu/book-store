@@ -8,13 +8,14 @@ import { setLoading } from "../store/slices/authSlice";
 
 const Dashboard = () => {
   const [books, setBooks] = useState([]);
+  console.log(books , "books")
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const { bookData } = useSelector((state) => state.book);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(bookData.length === 0) {
+    if(bookData?.length === 0) {
       dispatch(getAllBooks());
 
     }
@@ -30,7 +31,7 @@ const Dashboard = () => {
     // Get current posts
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentBooks = books.slice(indexOfFirstPost, indexOfLastPost);
+    const currentBooks = books?.slice(indexOfFirstPost, indexOfLastPost);
   
     // Change page
     const paginate = pageNumber => {
@@ -46,10 +47,11 @@ const Dashboard = () => {
         {/* <BookCard /> */}
         <BooksTable books={currentBooks}  />
         {
-          books.length > 10 && <Pagination
+          books?.length > 10 && <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={books.length}
+          totalPosts={books?.length}
           paginate={paginate}
+          currentPage={currentPage}
         />
         }
         

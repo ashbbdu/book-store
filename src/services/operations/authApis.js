@@ -82,3 +82,17 @@ export const login = (email, password, navigate) => {
     dispatch(setLoading(false));
   };
 };
+
+
+export const logout = (navigate) => {
+  return async (dispatch) => {
+    try { 
+      dispatch(setToken(null))
+      localStorage.removeItem("token")
+      toast.success("Logged out successfully !")
+      navigate("/")
+    } catch (error) {
+      toast.error("Some thing went wrong")
+    }
+  }
+}

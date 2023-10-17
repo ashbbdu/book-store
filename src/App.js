@@ -14,6 +14,8 @@ import Sidebar from "./components/Sidebar";
 import AddEditBook from "./pages/AddBook";
 import AddBook from "./pages/AddBook";
 import EditBook from "./pages/EditBook";
+import Cart from "./pages/Cart";
+
 
 function App() {
   const { loading, token } = useSelector((state) => state.auth);
@@ -67,6 +69,15 @@ function App() {
             element={
               <PrivateRoute>
                 <EditBook />
+              </PrivateRoute>
+            }
+          />
+
+<Route
+            path="/cart"
+            element={
+              <PrivateRoute>
+                <Cart />
               </PrivateRoute>
             }
           />

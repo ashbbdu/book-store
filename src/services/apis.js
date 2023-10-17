@@ -15,3 +15,9 @@ export const endpoints = {
     GET_BOOK_DETAILS_API : "/book/book-details",
     DELETE_BOOK_API : "/book/delete-book"
   }
+
+  export const cartEndpoints = {
+    CART_DATA_API :   "/cart/cartitems",
+    ADD_TO_CART_API: "/cart/addtocart",
+    REMOVE_FROM_CART_API : "/cart/removefromcart",
+  }

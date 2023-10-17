@@ -163,6 +163,7 @@ body{
   width: 350px;
   height: 140px;
   border-radius: 10px;
+  z-index: 10;
 }
 
 .modal-text {
@@ -187,7 +188,31 @@ body{
   top: 0;
   left: 0;
   overflow: hidden;
+  z-index: 12;
 }
+
+.table {
+  position: relative;
+  /* z-index: -1; */
+}
+
+.dashboard  nav {
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+
+}
+
+.sidebar-main > div {
+  min-width: 200px;
+  width: 200px;
+}
+
+.action-items span {
+  cursor: pointer;
+  margin: 0 5px;
+} 
+
 
 /* .pro-sidebar {
   width: 80px !important;

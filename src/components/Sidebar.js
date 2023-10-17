@@ -7,46 +7,50 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {BiLogOut} from "react-icons/bi"
+import { useDispatch } from 'react-redux';
+import { logout } from '../services/operations/authApis';
 
 const Sidebar = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        dispatch(logout(navigate))
+    }
   return (
-    <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'   }}>
+    <div className='sidebar-main' style={{ display: 'flex', height: '100vh', overflow: 'scroll initial'   }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+          <Link href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
             Sidebar
-          </a>
+          </Link>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <Link exact to="/dashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            </Link>
+            <Link exact to="/profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
-            </NavLink>
+            </Link>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
+        <CDBSidebarFooter>
           <div
-            style={{
-              padding: '20px 5px',
-            }}
           >
-            Sidebar Footer
+             <CDBSidebarContent className="sidebar-content">
+          <CDBSidebarMenu>
+            <Link exact to="/" activeClassName="activeClicked">
+                <div className='d-flex align-items-center' onClick={handleLogout}>
+            <BiLogOut size={20}  />  <CDBSidebarMenuItem >Logout</CDBSidebarMenuItem>
+            </div>
+            </Link>
+        
+          </CDBSidebarMenu>
+        </CDBSidebarContent>
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
