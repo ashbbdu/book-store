@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCartData } from '../services/operations/cartApis'
+import { getCartData, removeFromCart } from '../services/operations/cartApis'
 
 const Cart = () => {
     const {cartData} = useSelector(state => state.cart)
@@ -11,13 +11,17 @@ const Cart = () => {
             dispatch(getCartData())
         }
     })
+
+    const removeCartHandler = (id , data) => {
+        dispatch(removeFromCart(id , data))
+    }
   return (
     <div className="mt-4">
        Cart Page
        <div>
             {
                 cartData.map(res => {
-                    console.log(res , "res")
+                    console.log(res, "resid")
                     return (
                         <div className='container'>
                             <div className='row'>
@@ -29,7 +33,7 @@ const Cart = () => {
                             <h1>{res.totalPages}</h1>
                             </div>
                             </div>
-
+                        <button onClick={() => removeCartHandler(res._id , res)}>Remove from cart</button>
                         </div>
                     )
                 })
