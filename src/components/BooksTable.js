@@ -70,7 +70,7 @@ const BooksTable = ({ books }) => {
             {books.map((res, index) => {
               return (
                 <tr key={res._id}>
-                  <td>{}</td>
+                  <td>{res._id}</td>
                   <td>{res.title}</td>
                   <td>{res.author}</td>
                   <td>{res.price}</td>
