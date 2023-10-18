@@ -72,7 +72,6 @@ module.exports.signUp = async (req, res) => {
     // const recentOpt = await Otp.find({email :  email}).sort({ createdAt: -1 }).limit(1);
     const findOtp = await Otp.find()
     const recentOpt = findOtp.slice(-1)
-    console.log(recentOpt , "recent")
     if (recentOpt[0]?.otp !== otp) {
       return res.status(404).json({
         success: false,
@@ -94,7 +93,6 @@ module.exports.signUp = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
     return res.status(404).json({
       success: false,
       message: "Unable to create user , please try again",

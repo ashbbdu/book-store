@@ -2,7 +2,6 @@ const User = require("../models/User");
 
 module.exports.getAllUsers = async (req, res) => {
   try {
-    console.log(req.user , "user")
     const users = await User.find().populate("books").exec();
 
     return res.status(200).json({

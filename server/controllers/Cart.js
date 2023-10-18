@@ -3,9 +3,7 @@ const Cart = require("../models/Cart");
 module.exports.addToCart = async (req, res) => {
   try {
     const { bookId } = req.body;
-    console.log(bookId, "bookid");
-
-    if (!bookId) {
+     if (!bookId) {
       return res.status(400).json({
         success: false,
         message: "Invalid Book Id",
@@ -13,7 +11,6 @@ module.exports.addToCart = async (req, res) => {
     }
 
     const existingBook = await Cart.findOne({ book: bookId });
-    console.log(bookId, existingBook?.book.toString(), "bokk is");
     if (bookId === existingBook?.book.toString()) {
       return res.status(400).json({
         success: false,
@@ -31,7 +28,6 @@ module.exports.addToCart = async (req, res) => {
       addBook,
     });
   } catch (error) {
-    console.log(error, "error");
     return res.status(400).json({
       success: false,
       message: "Unable to add item into cart",
@@ -42,15 +38,12 @@ module.exports.addToCart = async (req, res) => {
 module.exports.removeFromCart = async (req, res) => {
   try {
     const {bookId} = req.body;
-    console.log(bookId , "book id")
     let bookss = await Cart.findOneAndRemove({book : bookId});
-    console.log(bookss, "book");
     return res.status(200).json({
       success: true,
       message: "Item removed from cart successfully",
     });
   } catch (error) {
-    console.log(error, "erri");
     return res.status(400).json({
       success: false,
       message: "Unable to remove item into cart",

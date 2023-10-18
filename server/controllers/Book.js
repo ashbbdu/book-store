@@ -3,7 +3,6 @@ const User = require("../models/User");
 
 module.exports.addBook = async (req, res) => {
   try {
-    console.log(req.user, "from books");
     const userId = req.user.id;
     const { title, author, genre, language, totalPages , price } = req.body;
     if (!title || !author || !genre || !language || !totalPages || !price) {
@@ -36,7 +35,6 @@ module.exports.addBook = async (req, res) => {
       book,
     });
   } catch (error) {
-    console.log(error, "error");
     return res.status(404).json({
       success: false,
       message: "Unable to add the book , please try again",
@@ -72,7 +70,7 @@ module.exports.editBook = async (req, res) => {
       book,
     });
   } catch (error) {
-    console.log(error, "error");
+
     return res.status(404).json({
       success: false,
       message: "Unable to update the book , please try again",
@@ -98,7 +96,6 @@ module.exports.getAllBooks = async (req, res) => {
       .sort({ createdAt : -1 })
       .exec();
 
-      // console.log("books" , books)
     res.status(200).json({
       success: true,
       message: "Books fetched successfully",
@@ -124,7 +121,7 @@ module.exports.bookDetails = async (req, res) => {
       bookDetails,
     });
   } catch (error) {
-    console.log(error);
+
     return res.status(404).json({
       success: false,
       message: "Unable fetch book details , please try again",
@@ -151,7 +148,6 @@ module.exports.deleteBook = async (req, res) => {
       deletedBook: bookDetails,
     });
   } catch (error) {
-    console.log(error);
     return res.status(404).json({
       success: false,
       message: "Unable delete the book , please try again",

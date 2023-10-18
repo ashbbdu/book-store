@@ -7,7 +7,6 @@ import { signup } from "../services/operations/authApis";
 
 const OtpForm = () => {
   const { signupData } = useSelector((state) => state.auth);
-console.log(signupData , "data")
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
