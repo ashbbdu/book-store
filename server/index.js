@@ -1,6 +1,6 @@
 const express = require("express");
 const { connect } = require("./config/database");
-const authRoutes = require("./routes/Auth") 
+const authRoutes = require("./routes/auth") 
 const userRoutes = require("./routes/user") 
 const bookRoutes = require("./routes/book") 
 const cartRoutes =  require("./routes/cart")
