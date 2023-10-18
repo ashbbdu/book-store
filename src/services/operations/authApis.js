@@ -3,24 +3,28 @@ import { endpoints } from "../apis";
 import { setLoading, setToken } from "../../store/slices/authSlice";
 import apiServices from "../apiServices";
 
-export const sendOtp = async (email, navigate, dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    const sendOpt = await apiServices.httpPost(endpoints.SENDOTP_API, {
-      email,
-    });
-
-    if (sendOpt.success) {
-      toast.success(sendOpt.message);
-      navigate("/verify-account");
-      dispatch(setLoading(false));
-    } else {
-      toast.error(sendOpt.message);
+export const sendOtp =  (email, navigate) => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const sendOpt = await apiServices.httpPost(endpoints.SENDOTP_API, {
+        email,
+      });
+      console.log(sendOpt , "otp")
+      if (sendOpt.success) {
+       
+        toast.success(sendOpt.message);
+        navigate("/verify-account");
+        dispatch(setLoading(false));
+      } else {
+        toast.error(sendOpt.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
     }
-  } catch (error) {
-    toast.error("Something went wrong");
+    dispatch(setLoading(false));
   }
-  dispatch(setLoading(false));
+ 
 };
 
 export const signup = (
@@ -66,7 +70,6 @@ export const login = (email, password, navigate) => {
       if (response.success) {
         dispatch(setToken(response.token))
         toast.success(response.message);
-        console.log(response.user.profilePicture , "propci")
         localStorage.setItem("token", response.token);
         localStorage.setItem("profilePic" , response.user.profilePicture)
         navigate("/dashboard");

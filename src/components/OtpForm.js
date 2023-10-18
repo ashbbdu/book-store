@@ -7,22 +7,28 @@ import { signup } from "../services/operations/authApis";
 
 const OtpForm = () => {
   const { signupData } = useSelector((state) => state.auth);
-  const { firstName, lastName, email, password } = signupData;
+console.log(signupData , "data")
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
 
+  useEffect(() => {
+    if(!signupData) {
+        navigate("/signup")
+    }
+  },[])
+ 
+
+
   const handleSubmit = async (e) => {
+    const { firstName, lastName, email, password } = signupData;
     e.preventDefault();
 
     dispatch(signup(firstName, lastName, email, password, otp, navigate));
   };
 
-  // useEffect(() => {
-  //   if(signupData === null) {
-  //     navigate("/")
-  //   }
-  // },[signupData])
+
 
   return (
     <>

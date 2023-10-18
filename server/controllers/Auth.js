@@ -27,7 +27,7 @@ module.exports.sendOtp = async (req, res) => {
       otp,
     });
 
-    console.log(optResponse, "otp res");
+    console.log(optResponse);
 
     return res.status(200).json({
       success: true,

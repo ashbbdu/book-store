@@ -6,7 +6,6 @@ import { getCartData } from "../services/operations/cartApis";
 
 const Header = () => {
   const profilePicture = localStorage.getItem("profilePic")
-  console.log(profilePicture , "profp")
   const { cartData } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {

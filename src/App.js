@@ -15,6 +15,7 @@ import AddEditBook from "./pages/AddBook";
 import AddBook from "./pages/AddBook";
 import EditBook from "./pages/EditBook";
 import Cart from "./pages/Cart";
+import Error from "./components/Error";
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
           <Route path="/" element={<AuthLayout />} />
           <Route path="/signup" element={<AuthLayout />} />
           <Route path="/verify-account" element={<AuthLayout />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </div>
     </>

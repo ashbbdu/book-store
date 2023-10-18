@@ -27,7 +27,7 @@ const SignupForm = () => {
   const submitHandler = async ( data) => {
     const { firstName ,  lastName , email , password  } = data;
 
-       sendOtp(email , navigate , dispatch)
+       dispatch(sendOtp(email , navigate , dispatch))
         dispatch(setSignupData({firstName , lastName ,email , password}))
      
  
