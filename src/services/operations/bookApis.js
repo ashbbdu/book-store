@@ -3,6 +3,7 @@ import { setLoading } from "../../store/slices/authSlice";
 import { setbookData, setBookDetails } from "../../store/slices/booksSlice";
 import { bookEndpoints } from "../apis";
 import apiServices from "../apiServices";
+import { getCartData } from "./cartApis";
 
 export const getAllBooks = (searchText) => {
   return async (dispatch) => {
@@ -102,6 +103,8 @@ export const editBook = (title, author, genre, language, totalPages ,price ,id, 
             toast.success(response.message);
             navigate("/dashboard")
             dispatch(getAllBooks())
+            dispatch(getCartData())
+          
           } else {
             toast.error(response.message);
           }
