@@ -16,7 +16,7 @@ function authHeader() {
 }
 
 const config = {
-  api: "http://localhost:4000/api/v1",
+  api: "https://book-store-backend-whzn.onrender.com/api/v1",
 };
 const httpGet = (endpoint , data) => {
   return fetch(`${config.api}${endpoint}`, {
