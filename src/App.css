@@ -184,7 +184,7 @@ button {
   background-color: #61dafb;
   padding: 15px;
   width: 350px;
-  height: 140px;
+  /* height: 140px; */
   border-radius: 10px;
   z-index: 10;
 }

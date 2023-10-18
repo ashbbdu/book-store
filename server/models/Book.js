@@ -37,8 +37,13 @@ const bookSchema = new mongoose.Schema({
   createdAt : {
   type: Date,
     default: Date.now,
-  }
-  //   ratings : {} have to check
+  },
+  ratingAndReviews: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "RatingAndReview",
+		},
+	],
 });
 
 module.exports = mongoose.model("Books", bookSchema);

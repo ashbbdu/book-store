@@ -21,3 +21,8 @@ export const endpoints = {
     ADD_TO_CART_API: "/cart/addtocart",
     REMOVE_FROM_CART_API : "/cart/removefromcart",
   }
+
+  export const reviewEndpoints = {
+    ADD_REVIEW_API :   "/review/add-review",
+  
+  }
