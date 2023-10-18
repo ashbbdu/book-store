@@ -195,6 +195,10 @@ button {
   z-index: 10;
 }
 
+.table-container {
+  overflow-x: auto;
+}
+
 .table-empty {
   display: flex;
   width: 100%;

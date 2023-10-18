@@ -52,6 +52,7 @@ const BooksTable = ({ books }) => {
           <h2>No books to display</h2>{" "}
         </div>
       ) : (
+        <div className="table-container">
         <table class="table">
           <thead>
             <tr>
@@ -69,7 +70,7 @@ const BooksTable = ({ books }) => {
             {books.map((res, index) => {
               return (
                 <tr key={res._id}>
-                  <td>{res._id}</td>
+                  <td>{}</td>
                   <td>{res.title}</td>
                   <td>{res.author}</td>
                   <td>{res.price}</td>
@@ -109,6 +110,7 @@ const BooksTable = ({ books }) => {
           }
           
         </table>
+        </div>
       )}
     </div>
   );
