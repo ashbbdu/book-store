@@ -10,7 +10,7 @@ const Cart = () => {
     if (cartData.length <= 0) {
       dispatch(getCartData());
     }
-  });
+  },[]);
 
   const removeCartHandler = (id, data) => {
     dispatch(removeFromCart(id, data));
