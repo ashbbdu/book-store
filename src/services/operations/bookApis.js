@@ -21,6 +21,7 @@ export const getAllBooks = (searchText) => {
 
 export const getBookDetails = (id) => {
   return async (dispatch) => {
+   dispatch(setLoading(true))
     try {
       const bookDetails = await apiServices.httpGet(
         `${bookEndpoints.GET_BOOK_DETAILS_API}/${id}`
@@ -30,6 +31,7 @@ export const getBookDetails = (id) => {
     } catch (error) {
       toast.error("Something went wrong");
     }
+    dispatch(setLoading(false))
   };
 };
 

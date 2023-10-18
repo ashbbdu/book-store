@@ -13,7 +13,16 @@ const BookDetails = () => {
     dispatch(getBookDetails(id))
   },[])
   return (
-    <div>BookDetails</div>
+    <div className='mt-4 py-4 px-2'>
+      <h2>Book Details</h2>
+       <div className='book-details'>
+          <h3>{bookDetails.title}</h3>
+          <h3>{bookDetails.author}</h3>
+          <h4>{bookDetails.genre}</h4>
+          <h3>{bookDetails.language}</h3>
+          <h3>{bookDetails.totalPages}</h3>
+       </div>
+    </div>
   )
 }
 
