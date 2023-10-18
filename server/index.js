@@ -8,7 +8,7 @@ const reviewRoutes = require("./routes/reviewAndRating")
 const app = express();
 var cors = require('cors')
 
-const PORT = process.env.PORT || 5000 
+const PORT = process.env.PORT || 4000 
 require("dotenv").config()
 app.use(express.json());
 app.use(cors())
