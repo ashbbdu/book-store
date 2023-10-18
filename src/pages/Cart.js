@@ -43,7 +43,7 @@ const Cart = () => {
           cartData?.map((res) => {
 
             return (
-              <div className="container cart-box">
+              <div key={res._id} className="container cart-box">
                 <div className="row">
                   <div className="col-12 mb-4">
                     <h1>Title : {res.title}</h1>
