@@ -19,7 +19,7 @@ const Cart = () => {
   const getTotalPrice = () => {
     let total = 0;
     for (let i = 0; i < cartData.length; i++) {
-      total = Number(cartData[i].price) + total;
+      total = Number(cartData[i]?.price) + total;
     }
     setCartTotal(total);
   };
@@ -43,18 +43,18 @@ const Cart = () => {
           cartData?.map((res) => {
 
             return (
-              <div key={res._id} className="container cart-box">
+              <div key={res?._id} className="container cart-box">
                 <div className="row">
                   <div className="col-12 mb-4">
-                    <h1>Title : {res.title}</h1>
-                    <h1>Author : {res.author}</h1>
-                    <h1>Language : {res.language}</h1>
-                    <h1>Genre : {res.genre}</h1>
-                    <h1>Price : {res.price}</h1>
-                    <h1>Total Pages : {res.totalPages}</h1>
+                    <h1>Title : {res?.title}</h1>
+                    <h1>Author : {res?.author}</h1>
+                    <h1>Language : {res?.language}</h1>
+                    <h1>Genre : {res?.genre}</h1>
+                    <h1>Price : {res?.price}</h1>
+                    <h1>Total Pages : {res?.totalPages}</h1>
                     <button
                       className="btn btn-info"
-                      onClick={() => removeCartHandler(res._id, res)}
+                      onClick={() => removeCartHandler(res?._id, res)}
                     >
                       Remove from cart
                     </button>
