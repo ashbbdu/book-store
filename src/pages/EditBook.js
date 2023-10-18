@@ -24,6 +24,7 @@ const EditBook = () => {
       genre:"",
       language: "",
       totalPages: "",
+      price : ""
     },
   });
 
@@ -33,6 +34,7 @@ const EditBook = () => {
     setValue("genre" , bookDetails.genre)
     setValue("language" , bookDetails.language)
     setValue("totalPages" , bookDetails.totalPages)
+    setValue("price" , bookDetails.price)
   } ,[[register]])
 
   useEffect(() => {
@@ -42,8 +44,8 @@ const EditBook = () => {
 
 
   const submitHandler = async (data) => {
-    const { title, author, genre, language, totalPages } = data;
-    dispatch(editBook(title, author, genre, language, totalPages , id, navigate));
+    const { title, author, genre, language, totalPages ,price } = data;
+    dispatch(editBook(title, author, genre, language, totalPages ,price , id, navigate));
   };
 
   return (
@@ -74,6 +76,17 @@ const EditBook = () => {
             {...register("author", { required: true })}
           />
           {errors.author && (
+            <p className="text-danger">This field is required</p>
+          )}
+        </div>
+        <div className="mb-1">
+          <label>Price</label>
+          <input
+            className="form-control"
+            type="number"
+            {...register("price", { required: true })}
+          />
+          {errors.price && (
             <p className="text-danger">This field is required</p>
           )}
         </div>
@@ -112,13 +125,9 @@ const EditBook = () => {
             <p className="text-danger">This field is required</p>
           )}
         </div>
-        <div>
-          <lable>Cover</lable>
-          <input type="file" className="form-control" />
-        </div>
 
         <button className="btn btn-info my-4 " type="submit">
-          {id ? "Update Book" : " Add Book"}
+          Update Book
         </button>
       </form>
     </div>

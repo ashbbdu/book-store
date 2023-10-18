@@ -22,14 +22,15 @@ const AddBook = () => {
       title: "",
       author: "",
       genre: "",
+      price : "",
       language: "",
       totalPages: "",
     },
   });
   const submitHandler = async (data) => {
-    const { title, author, genre, language, totalPages } = data;
+    const { title, author, genre, language, totalPages , price } = data;
   
-      dispatch(addBook(title, author, genre, language, totalPages, navigate));
+      dispatch(addBook(title, author, genre, language, totalPages , price, navigate));
   
   };
 
@@ -61,6 +62,19 @@ const AddBook = () => {
             <p className="text-danger">This field is required</p>
           )}
         </div>
+
+        <div className="mb-1">
+          <label>Price</label>
+          <input
+            className="form-control"
+            type="number"
+            {...register("price", { required: true })}
+          />
+          {errors.price && (
+            <p className="text-danger">This field is required</p>
+          )}
+        </div>
+
         <div className="mb-1">
           <label>Genre</label>
           <input
@@ -89,16 +103,12 @@ const AddBook = () => {
           <label>Total Pages</label>
           <input
             className="form-control"
-            type="text"
+            type="number"
             {...register("totalPages", { required: true })}
           />
           {errors.totalPages && (
             <p className="text-danger">This field is required</p>
           )}
-        </div>
-        <div>
-          <lable>Cover</lable>
-          <input type="file" className="form-control" />
         </div>
 
         <button className="btn btn-info my-4 " type="submit">

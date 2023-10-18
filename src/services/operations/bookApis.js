@@ -52,7 +52,7 @@ export const deleteBok = (id) => {
   };
 };
 
-export const addBook = (title, author, genre, language, totalPages , navigate) => {
+export const addBook = (title, author, genre, language, totalPages , price, navigate) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -64,6 +64,7 @@ export const addBook = (title, author, genre, language, totalPages , navigate) =
           genre,
           language,
           totalPages,
+          price
         }
       );
 
@@ -82,7 +83,7 @@ export const addBook = (title, author, genre, language, totalPages , navigate) =
   };
 };
 
-export const editBook = (title, author, genre, language, totalPages ,id, navigate  ) => {
+export const editBook = (title, author, genre, language, totalPages ,price ,id, navigate  ) => {
     console.log(id , "controllers id")
     return async (dispatch) => {
         dispatch(setLoading(true));
@@ -94,6 +95,7 @@ export const editBook = (title, author, genre, language, totalPages ,id, navigat
               author,
               genre,
               language,
+              price,
               totalPages,
             }
           );

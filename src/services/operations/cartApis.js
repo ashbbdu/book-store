@@ -7,13 +7,12 @@ import apiServices from "../apiServices";
 
 export const getCartData = () => {
   return async (dispatch) => {
-    //   dispatch(setLoading(true));
+  
     try {
       const response = await apiServices.httpGet(cartEndpoints.CART_DATA_API);
-      console.log(response, "item");
       
         response.cartItem.map((res) => {
-            console.log(res, "ressdafa");
+
             dispatch(setCartData(res.book));
            
           });
@@ -23,7 +22,7 @@ export const getCartData = () => {
     } catch (error) {
       toast.error("Something went wrong");
     }
-    //   dispatch(setLoading(false));
+   
   };
 };
 

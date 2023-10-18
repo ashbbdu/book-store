@@ -5,8 +5,8 @@ module.exports.addBook = async (req, res) => {
   try {
     console.log(req.user, "from books");
     const userId = req.user.id;
-    const { title, author, genre, language, totalPages } = req.body;
-    if (!title || !author || !genre || !language || !totalPages) {
+    const { title, author, genre, language, totalPages , price } = req.body;
+    if (!title || !author || !genre || !language || !totalPages || !price) {
       return res.status(404).json({
         success: false,
         message: "Please fill in the required fields",
@@ -18,10 +18,10 @@ module.exports.addBook = async (req, res) => {
       author,
       genre,
       language,
+      price,
       totalPages,
       user: userId,
       createdAt : Date.now() ,
-      coverPicture: "",
     } );
 
     const user = await User.findByIdAndUpdate(
@@ -47,8 +47,8 @@ module.exports.addBook = async (req, res) => {
 module.exports.editBook = async (req, res) => {
   try {
     const bookId = req.params.id;
-    const { title, author, genre, language, totalPages } = req.body;
-    if (!title || !author || !genre || !language || !totalPages) {
+    const { title, author, genre, language, totalPages , price} = req.body;
+    if (!title || !author || !genre || !language || !totalPages || !price) {
       return res.status(404).json({
         success: false,
         message: "Please fill in the required fields",
@@ -61,7 +61,7 @@ module.exports.editBook = async (req, res) => {
       genre,
       language,
       totalPages,
-      coverPicture: "",
+      price,
     },{new : true})
 
 
@@ -87,7 +87,7 @@ module.exports.getAllBooks = async (req, res) => {
       $expr: {
         $regexMatch: {
           input: {
-            $concat: ["$title", "$author" , "$genre" , "$language" , "$totalPages" ],
+            $concat: ["$title", "$author" , "$genre" , "$language" , "$totalPages" , "$price" ],
           },
           regex : searchText == undefined ? "" : searchText,
           options: "i",

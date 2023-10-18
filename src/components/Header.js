@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-image d-flex align-items-center">
-        {cartData.length}
+        <h4 className="cart-length">{cartData.length}</h4>
         <Link to="/cart" className="header-cart">
           {" "}
           <AiOutlineShoppingCart size={25} color="#f6f6f6" />

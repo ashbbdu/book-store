@@ -60,6 +60,7 @@ const BooksTable = ({ books }) => {
               <th scope="col">Book No.</th>
               <th scope="col">Title</th>
               <th scope="col">Author</th>
+              <th scope="col">Price</th>
               <th scope="col">Genre</th>
               <th scope="col">Language</th>
               <th scope="col">Pages</th>
@@ -73,6 +74,7 @@ const BooksTable = ({ books }) => {
                   <td>{res._id}</td>
                   <td>{res.title}</td>
                   <td>{res.author}</td>
+                  <td>{res.price}</td>
                   <td>{res.genre}</td>
                   <td>{res.language}</td>
                   <td>{res.totalPages}</td>

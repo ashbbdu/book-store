@@ -160,10 +160,9 @@ button {
   width: 40px;
   position: absolute;
   right: 0;
-  margin-right: 60px;
+  margin-right: 80px;
   margin-top: 5px;
   cursor: pointer;
-
 }
 
 .header-image img {
@@ -173,6 +172,13 @@ button {
 .header-cart {
   margin-right: 20px;
   cursor: pointer;
+}
+
+.cart-length {
+  background-color: red;
+  padding: 3px 7px;
+  font-size: 14px;
+  border-radius: 100px;
 }
 
 
@@ -253,13 +259,27 @@ button {
 }
 
 .cart-container {
-  height: 90vh;
+  height: 65vh !important;
   overflow: scroll;
 }
 
 .cart-box h1 {
   font-size: 20px;
 }
+
+.payment {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.payment-btn {
+  text-align: right;
+}
+
+/* .book-details {
+  max-width: 500px;
+  margin: 0 auto;
+} */
 
 /* .pro-sidebar {
   width: 80px !important;

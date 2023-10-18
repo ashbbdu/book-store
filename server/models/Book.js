@@ -26,13 +26,13 @@ const bookSchema = new mongoose.Schema({
     trim: true,
     required : true
   },
-  coverPicture: {
-    type: String,
-    // required: true,
-  },
   user : {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+  },
+ price :  {
+  type: String,
+  required: true,
   },
   createdAt : {
   type: Date,

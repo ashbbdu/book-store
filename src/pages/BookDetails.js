@@ -50,18 +50,21 @@ const BookDetails = () => {
     <div className="mt-4 py-4 px-2">
       <RatingModal open={open} setOpen={setOpen} bookId={bookDetails._id} />
       <h2>Book Details</h2>
-      <div className="book-details">
-        <h3>{bookDetails.title}</h3>
-        <h3>{bookDetails.author}</h3>
-        <h4>{bookDetails.genre}</h4>
-        <h3>{bookDetails.language}</h3>
-        <h3>{bookDetails.totalPages}</h3>
-      </div>
-      <button onClick={() => setOpen(true)} className="btn btn-info">
+      <div className="card p-4">
+      
+        <h3>Title : {bookDetails.title}</h3>
+        <h3>Author : {bookDetails.author}</h3>
+        <h3>Genre : {bookDetails.genre}</h3>
+        <h3>Language : {bookDetails.language}</h3>
+        <h3>Total Pages: {bookDetails.totalPages}</h3>
+        <h3>Avearage Rating :   <Rating onClick={handleRating} allowFraction initialValue={avg} readonly /></h3>
+        <button onClick={() => setOpen(true)} className="btn btn-info">
         Click Here to add review
       </button>
-      <Rating onClick={handleRating} allowFraction initialValue={avg} readonly />
-      <input type="text" className="form-control w-50" />
+      
+      </div>
+   
+     
     </div>
   );
 };
