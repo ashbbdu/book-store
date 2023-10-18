@@ -13,7 +13,6 @@ const OtpForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
-  console.log(otp, "otp");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

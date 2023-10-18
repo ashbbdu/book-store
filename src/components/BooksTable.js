@@ -18,7 +18,6 @@ const BooksTable = ({ books }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartData } = useSelector((state) => state.cart);
-  console.log(cartData, "cartData");
 
   const deleteHandler = () => {
     dispatch(deleteBok(id));
@@ -26,7 +25,6 @@ const BooksTable = ({ books }) => {
   };
 
   const handleCart = (id, data) => {
-    console.log(id, "id");
     dispatch(addToCart(id, data));
   };
 

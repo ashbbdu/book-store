@@ -229,7 +229,7 @@ button {
 
 .table {
   position: relative;
-  /* z-index: -1; */
+  z-index: 1;
 }
 
 .dashboard nav {
@@ -275,6 +275,10 @@ button {
 .payment-btn {
   text-align: right;
 }
+
+/* .sidebar-content > nav > ul > a > div{
+  margin-left: 20px;
+} */
 
 /* .book-details {
   max-width: 500px;

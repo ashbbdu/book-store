@@ -2,7 +2,6 @@ function authHeader() {
   const token = localStorage.getItem("token")
     ? localStorage.getItem("token")
     : null;
-  console.log(token, "auth services");
   if (token != null) {
     return {
       "Content-Type": "application/json",
@@ -31,7 +30,6 @@ const httpGet = (endpoint , data) => {
     });
 };
 const httpPost = async (endpoint, data) => {
-  console.log(endpoint, JSON.stringify(data), "endpoint");
   return await fetch(`${config.api}${endpoint}`, {
     method: "post",
     body: data ? JSON.stringify(data) : null,

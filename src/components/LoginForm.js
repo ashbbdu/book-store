@@ -11,7 +11,6 @@ const LoginForm = () => {
     password: "",
   });
 
-  console.log(formData, "formdata");
 
   const onChangeHander = (e) => {
     setFormData((prevData) => ({
@@ -22,7 +21,6 @@ const LoginForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formData, "fd");
     // API Call here
     const {email , password} = formData;
    dispatch(login(email , password , navigate ))

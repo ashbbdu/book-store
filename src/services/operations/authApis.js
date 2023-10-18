@@ -43,7 +43,6 @@ export const signup = (
         password,
         otp,
       });
-      console.log(createAcc, "created");
       if (createAcc.success) {
         navigate("/");
         toast.success(createAcc.message);
@@ -51,7 +50,6 @@ export const signup = (
         toast.error(createAcc.message);
       }
     } catch (error) {
-      console.log(error, "errors");
       toast.error("Something went wrong");
     }
     dispatch(setLoading(false));
@@ -66,7 +64,6 @@ export const login = (email, password, navigate) => {
         email,
         password,
       });
-      console.log(response.token, "login");
       if (response.success) {
         dispatch(setToken(response.token))
         toast.success(response.message);
@@ -77,7 +74,7 @@ export const login = (email, password, navigate) => {
         toast.error(response.message);
       }
     } catch (error) {
-      console.log("Something went wrong");
+     toast.error("Something went wrong");
     }
     dispatch(setLoading(false));
   };

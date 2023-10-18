@@ -18,8 +18,7 @@ import Cart from "./pages/Cart";
 
 
 function App() {
-  const { loading, token } = useSelector((state) => state.auth);
-  console.log(token, "token");
+  const { loading } = useSelector((state) => state.auth);
   return (
     <>
       {loading && <Loader />}

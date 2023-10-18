@@ -32,9 +32,7 @@ const Sidebar = () => {
             <Link exact to="/dashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </Link>
-            <Link exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-            </Link>
+            
             <Link exact to="/cart" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Cart</CDBSidebarMenuItem>
             </Link>
@@ -46,10 +44,13 @@ const Sidebar = () => {
           >
              <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <Link exact to="/" activeClassName="activeClicked">
+            {/* <Link exact to="/" activeClassName="activeClicked">
                 <div className='d-flex align-items-center' onClick={handleLogout}>
             <BiLogOut size={20}  />  <CDBSidebarMenuItem >Logout</CDBSidebarMenuItem>
             </div>
+            </Link> */}
+             <Link exact to="/cart" activeClassName="activeClicked" onClick={handleLogout}>
+              <CDBSidebarMenuItem icon="arrow-right">Logout</CDBSidebarMenuItem>
             </Link>
         
           </CDBSidebarMenu>

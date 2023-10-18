@@ -6,7 +6,6 @@ const Cart = () => {
   const { cartData } = useSelector((state) => state.cart);
   const [cartTotal, setCartTotal] = useState(0);
   const dispatch = useDispatch();
-  console.log(cartData, "cartData");
   useEffect(() => {
     if (cartData.length <= 0) {
       dispatch(getCartData());
@@ -41,8 +40,8 @@ const Cart = () => {
             <h2>Your cart is empty !</h2>
           </div>
         ) : (
-          cartData.map((res) => {
-            console.log(res, "resid");
+          cartData?.map((res) => {
+
             return (
               <div className="container cart-box">
                 <div className="row">

@@ -10,18 +10,17 @@ import { getReviews } from "../services/operations/reviewandratingApis";
 const BookDetails = () => {
   const { bookDetails } = useSelector((state) => state.book);
   const { ratingData } = useSelector((state) => state.rating);
-  console.log(ratingData , "ratingdata")
+
   const [open, setOpen] = useState(false);
   const { id } = useParams();
   const [rating, setRating] = useState(0);
   const [avg , setAvg] = useState(0)
-  console.log(avg , "avg");
+
 
   const findAvgRating = () => {
   let value = 0
  
   for(let i =0 ; i < ratingData.length ; i++) {
-    console.log(typeof(ratingData[i].rating ), "iiiii")
     value = ratingData[i].rating + value
   }
   let avg = value/ratingData.length

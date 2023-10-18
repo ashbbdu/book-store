@@ -27,7 +27,6 @@ export const getBookDetails = (id) => {
         `${bookEndpoints.GET_BOOK_DETAILS_API}/${id}`
       );
       dispatch(setBookDetails(bookDetails.bookDetails))
-      console.log(bookDetails, "bookdetails");
     } catch (error) {
       toast.error("Something went wrong");
     }
@@ -41,7 +40,7 @@ export const deleteBok = (id) => {
       const response = await apiServices.httpDelete(
         `${bookEndpoints.DELETE_BOOK_API}/${id}`
       );
-      console.log(response, "deleted book");
+  
       if (response.success) {
         toast.success(response.message);
         dispatch(getAllBooks());
@@ -84,7 +83,6 @@ export const addBook = (title, author, genre, language, totalPages , price, navi
 };
 
 export const editBook = (title, author, genre, language, totalPages ,price ,id, navigate  ) => {
-    console.log(id , "controllers id")
     return async (dispatch) => {
         dispatch(setLoading(true));
         try {

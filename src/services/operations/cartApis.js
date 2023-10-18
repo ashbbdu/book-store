@@ -28,13 +28,12 @@ export const getCartData = () => {
 
 export const addToCart = (id, data) => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
+
     try {
       const response = await apiServices.httpPost(
         cartEndpoints.ADD_TO_CART_API,
         { bookId: id }
       );
-      console.log(response, "response");
       if(response.success){
         toast.success(response.message)
         dispatch(setCartData(data));
@@ -45,7 +44,7 @@ export const addToCart = (id, data) => {
     } catch (error) {
       toast.error("Something went wrong");
     }
-    dispatch(setLoading(false));
+   
   };
 };
 
@@ -58,7 +57,6 @@ export const removeFromCart = (id , data) => {
           cartEndpoints.REMOVE_FROM_CART_API,
           { bookId: id }
         );
-        console.log(response, "response");
         if(response.success){
           toast.success(response.message)
           dispatch(removeCart(data));

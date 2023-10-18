@@ -8,7 +8,6 @@ const EditBook = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { bookDetails } = useSelector((state) => state.book);
-  console.log(bookDetails, "bookDetailsasdfasf");
   const { id } = useParams();
   const {
     register,
@@ -49,7 +48,7 @@ const EditBook = () => {
   };
 
   return (
-    <div className="container p-4">
+    <div className="container mt-4 p-4">
       <form className="w-100" onSubmit={handleSubmit(submitHandler)}>
         <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
           {id ? "Update Book" : " Add Book"}

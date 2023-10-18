@@ -7,7 +7,6 @@ import SignupForm from "../components/SignupForm";
 
 const AuthLayout = () => {
   const location = useLocation();
-  console.log(location.pathname, "parms");
   return (
     <section className="vh-100 main-section">
       <div className="container-fluid ">

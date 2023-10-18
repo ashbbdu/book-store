@@ -7,7 +7,6 @@ import { getCartData } from "../services/operations/cartApis";
 const Header = () => {
   const { cartData } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log(cartData, "cartData");
   useEffect(() => {
     if (cartData.length <= 0) {
       dispatch(getCartData());
