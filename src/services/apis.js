@@ -24,5 +24,6 @@ export const endpoints = {
 
   export const reviewEndpoints = {
     ADD_REVIEW_API :   "/review/add-review",
+    GET_REVIEW_API : "/review/getReviews"
   
   }

@@ -38,7 +38,7 @@ const Cart = () => {
                     <h1>{res.totalPages}</h1>
                   </div>
                   <div>
-                <div>*****</div>
+            
                <button className="btn btn-info" onClick={() => removeCartHandler(res._id, res)}>
                   Remove from cart
                 </button>

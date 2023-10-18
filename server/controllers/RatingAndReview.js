@@ -39,3 +39,22 @@ module.exports.addRating = async (req, res) => {
     });
   }
 };
+
+
+module.exports.getRating = async (req , res) => {
+    try {
+        const bookId = req.params.id
+        console.log(bookId , "bookdiu")
+        const reviews = await RatingAndReview.find({book : bookId})
+        return res.status(200).json({
+            success :true,
+            message : "Reviews fetched successfully",
+            reviews
+        })
+    } catch (error) {
+        return res.status(401).json({
+            success :false,
+            message : "Unable to fetch reviews"
+        }) 
+    }
+}
