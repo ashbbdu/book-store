@@ -7,8 +7,7 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import {BiLogOut} from "react-icons/bi"
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../services/operations/authApis';
 

@@ -32,8 +32,6 @@ module.exports.sendOtp = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "OTP send successfully !",
-      // remove this because we dont have to show otp in console
-      data: optResponse,
     });
   } catch (error) {
     return res.status(400).json({

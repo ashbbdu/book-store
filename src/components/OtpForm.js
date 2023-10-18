@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { apiConnector } from "../services/apiConnector";
-import { endpoints } from "../services/apis";
 import { signup } from "../services/operations/authApis";
-import { setLoading } from "../store/slices/authSlice";
+
 
 const OtpForm = () => {
   const { signupData } = useSelector((state) => state.auth);

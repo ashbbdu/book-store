@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { getCartData } from "../services/operations/cartApis";
 
 const Header = () => {
+  const profilePicture = localStorage.getItem("profilePic")
+  console.log(profilePicture , "profp")
   const { cartData } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,7 +22,7 @@ const Header = () => {
           {" "}
           <AiOutlineShoppingCart size={25} color="#f6f6f6" />
         </Link>
-        <img src="https://api.dicebear.com/5.x/initials/svg?seed=Ashish Srivastava" />
+        <img src={profilePicture} alt="profile" />
       </div>
     </div>
   );

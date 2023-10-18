@@ -1,5 +1,4 @@
 import { toast } from "react-hot-toast";
-import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
 import { setLoading, setToken } from "../../store/slices/authSlice";
 import apiServices from "../apiServices";
@@ -67,8 +66,9 @@ export const login = (email, password, navigate) => {
       if (response.success) {
         dispatch(setToken(response.token))
         toast.success(response.message);
-        
+        console.log(response.user.profilePicture , "propci")
         localStorage.setItem("token", response.token);
+        localStorage.setItem("profilePic" , response.user.profilePicture)
         navigate("/dashboard");
       } else {
         toast.error(response.message);
@@ -86,6 +86,7 @@ export const logout = (navigate) => {
     try { 
       dispatch(setToken(null))
       localStorage.removeItem("token")
+      localStorage.removeItem("profilePic")
       toast.success("Logged out successfully !")
       navigate("/")
     } catch (error) {
