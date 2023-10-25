@@ -1,19 +1,22 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm , Controller} from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { editBook, getBookDetails } from "../services/operations/bookApis";
+import Multiselect from "multiselect-react-dropdown";
 
 const EditBook = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { bookDetails } = useSelector((state) => state.book);
+  console.log(bookDetails ,"bookdetails")
   const { id } = useParams();
   const {
     register,
     handleSubmit,
     getValues,
     setValue,
+    control,
     watch,
     formState: { errors },
   } = useForm({
@@ -30,7 +33,7 @@ const EditBook = () => {
   useEffect(() => {
     setValue("title" , bookDetails?.title)
     setValue("author" , bookDetails.author)
-    setValue("genre" , bookDetails.genre)
+    setValue("genre" , bookDetails?.genre)
     setValue("language" , bookDetails.language)
     setValue("totalPages" , bookDetails.totalPages)
     setValue("price" , bookDetails.price)
@@ -89,7 +92,7 @@ const EditBook = () => {
             <p className="text-danger">This field is required</p>
           )}
         </div>
-        <div className="mb-1">
+        {/* <div className="mb-1">
           <label>Genre</label>
           <input
             className="form-control"
@@ -101,7 +104,40 @@ const EditBook = () => {
           {errors.genre && (
             <p className="text-danger">This field is required</p>
           )}
-        </div>
+        </div> */}
+        <label>Genre</label>
+<Controller
+          name="genre"
+          control={control}
+          rules={{ required: true }}
+          render={({ field: { ref, ...field } }) => {
+            console.log(" {console.log(field)}", field);
+            return (
+              <Multiselect
+              className="form-control"
+                {...field}
+                inputRef={ref}
+                selectedValues={bookDetails.genre}
+                displayValue="name"
+                onSelect={(selected, item) => {
+                  setValue("genre", selected);
+                }}
+                onRemove={(selected, item) => {
+                  setValue("genre", selected);
+                }}
+              
+                options={[
+                  { value: "chocolate", name: "Chocolate", id: 1 },
+                  { value: "strawberry", name: "Strawberry", id: 2 },
+                  { value: "vanilla", name: "Vanilla", id: 3 }
+                ]}
+              />
+            );
+          }}
+        />
+         {errors.genre && (
+            <p className="text-danger">This field is required</p>
+          )}
         <div className="mb-1">
           <label>Language</label>
           <input

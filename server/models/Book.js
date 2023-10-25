@@ -11,11 +11,13 @@ const bookSchema = new mongoose.Schema({
     required: [true, "Author is required !"],
     trim: true,
   },
-  genre: {
-    type: String,
-    required: [true, "Genre is required !"],
-    trim: true,
-  },
+  genre: [
+    {
+      type: Object,
+      required: [true, "Genre is required !"],
+      trim: true,
+    }
+  ],
   language: {
     type: String,
     trim: true,

@@ -35,6 +35,7 @@ module.exports.addBook = async (req, res) => {
       book,
     });
   } catch (error) {
+    console.log(error ,"err")
     return res.status(404).json({
       success: false,
       message: "Unable to add the book , please try again",
@@ -85,7 +86,7 @@ module.exports.getAllBooks = async (req, res) => {
       $expr: {
         $regexMatch: {
           input: {
-            $concat: ["$title", "$author" , "$genre" , "$language" , "$totalPages" , "$price" ],
+            $concat: ["$title", "$author"  , "$language" , "$totalPages" , "$price" ],
           },
           regex : searchText == undefined ? "" : searchText,
           options: "i",
@@ -102,6 +103,7 @@ module.exports.getAllBooks = async (req, res) => {
       books,
     });
   } catch (error) {
+    console.log(error , "error")
     return res.status(404).json({
       success: false,
       message: "Unable to add the book , please try again",

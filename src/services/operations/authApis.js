@@ -24,7 +24,7 @@ export const sendOtp =  (email, navigate) => {
     }
     dispatch(setLoading(false));
   }
- 
+
 };
 
 export const signup = (

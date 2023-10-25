@@ -74,7 +74,7 @@ const BooksTable = ({ books }) => {
                   <td>{res.title}</td>
                   <td>{res.author}</td>
                   <td>{res.price}</td>
-                  <td>{res.genre}</td>
+                  <td>{res.genre.map(el => el.name)}</td>
                   <td>{res.language}</td>
                   <td>{res.totalPages}</td>
                   <td>
